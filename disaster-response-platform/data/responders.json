@@ -1,0 +1,38 @@
+[
+  {
+    "id": "OF001",
+    "name": "Rescue Team Alpha",
+    "role": "Disaster Response Officer",
+    "lat": 18.1067,
+    "lng": 83.4126,
+    "available": true,
+    "contact": "+91-9000000001"
+  },
+  {
+    "id": "OF002",
+    "name": "Rescue Team Bravo",
+    "role": "Disaster Response Officer",
+    "lat": 18.1205,
+    "lng": 83.397,
+    "available": true,
+    "contact": "+91-9000000002"
+  },
+  {
+    "id": "OF003",
+    "name": "Rescue Team Charlie",
+    "role": "Disaster Response Officer",
+    "lat": 18.0915,
+    "lng": 83.428,
+    "available": true,
+    "contact": "+91-9000000003"
+  },
+  {
+    "id": "OF004",
+    "name": "Rescue Team Delta",
+    "role": "Disaster Response Officer",
+    "lat": 18.128,
+    "lng": 83.419,
+    "available": true,
+    "contact": "+91-9000000004"
+  }
+]

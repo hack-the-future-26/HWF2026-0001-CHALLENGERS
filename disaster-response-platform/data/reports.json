@@ -1,0 +1,35 @@
+[
+  {
+    "id": "REQ-MTSWIFCP",
+    "text": "flood",
+    "isVoiceReport": false,
+    "hadTranscript": true,
+    "audioUrl": null,
+    "lat": 18.2116883,
+    "lng": 83.4685151,
+    "locationSource": "gps",
+    "address": null,
+    "name": "lavanya",
+    "phone": "7981209758",
+    "language": "en",
+    "peopleCount": 100,
+    "emergencyType": "flood",
+    "severity": {
+      "score": 4,
+      "level": "Medium",
+      "disasterType": "flood",
+      "vulnerablePeople": [],
+      "matchedTerms": [
+        "flood"
+      ]
+    },
+    "status": "pending",
+    "assignedResponder": null,
+    "responderDistanceKm": null,
+    "responderEtaMinutes": null,
+    "dispatchedAt": null,
+    "arrivedAt": null,
+    "createdAt": "2026-09-08T16:45:58.201Z",
+    "updatedAt": "2026-09-08T16:45:58.201Z"
+  }
+]

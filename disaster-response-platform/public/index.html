@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>RescueLink — AI Emergency Response Platform</title>
+<meta name="description" content="AI-powered emergency response and disaster assistance platform" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-icon">🚨</span>
+    <span class="brand-name">RescueLink</span>
+  </div>
+  <nav class="tabs" id="tabs">
+    <button class="tab-btn active" data-tab="report" data-i18n="tab_report">Report Emergency</button>
+    <button class="tab-btn" data-tab="map" data-i18n="tab_map">Live Map</button>
+    <button class="tab-btn" data-tab="chatbot" data-i18n="tab_chatbot">AI Assistant</button>
+    <button class="tab-btn" data-tab="dashboard" data-i18n="tab_dashboard">Authority Dashboard</button>
+  </nav>
+  <div class="lang-switch">
+    <select id="langSelect">
+      <option value="en">English</option>
+      <option value="hi">हिंदी</option>
+      <option value="te">తెలుగు</option>
+    </select>
+  </div>
+</header>
+
+<div class="conn-banner" id="connBanner" style="display:none" data-i18n="offline_banner">
+  ⚠ You appear to be offline. Reports will send once connection is restored.
+</div>
+
+<main>
+
+  <!-- ============ REPORT TAB ============ -->
+  <section id="tab-report" class="tab-panel active">
+    <div class="panel-grid">
+      <form id="reportForm" class="card">
+        <h2 data-i18n="report_title">Report an Emergency</h2>
+        <p class="muted" data-i18n="report_subtitle">Describe what's happening. Our AI will assess severity and route help.</p>
+
+        <label data-i18n="label_name">Your Name (optional)</label>
+        <input type="text" id="reporterName" data-i18n-ph="ph_name" placeholder="e.g. Ramesh Kumar" />
+
+        <label data-i18n="label_phone">Phone Number (optional)</label>
+        <input type="tel" id="reporterPhone" data-i18n-ph="ph_phone" placeholder="e.g. +91 90000 00000" />
+
+        <label data-i18n="label_people">Number of people affected</label>
+        <input type="number" id="peopleCount" min="1" value="1" />
+
+        <label data-i18n="label_type">Type of Emergency</label>
+        <div class="chip-row" id="emergencyTypeChips">
+          <button type="button" class="chip" data-type="flood">🌊 <span data-i18n="type_flood">Flood</span></button>
+          <button type="button" class="chip" data-type="cyclone">🌀 <span data-i18n="type_cyclone">Cyclone</span></button>
+          <button type="button" class="chip" data-type="fire">🔥 <span data-i18n="type_fire">Fire</span></button>
+          <button type="button" class="chip" data-type="earthquake">🏚️ <span data-i18n="type_earthquake">Earthquake</span></button>
+          <button type="button" class="chip" data-type="medical">🚑 <span data-i18n="type_medical">Medical</span></button>
+          <button type="button" class="chip" data-type="landslide">⛰️ <span data-i18n="type_landslide">Landslide</span></button>
+          <button type="button" class="chip" data-type="other">❓ <span data-i18n="type_other">Other</span></button>
+        </div>
+
+        <label data-i18n="label_desc">What's happening? *</label>
+        <textarea id="reportText" rows="4" data-i18n-ph="ph_desc"
+          placeholder="e.g. Water has entered my house. My grandmother cannot walk and we need help."></textarea>
+
+        <div class="voice-section">
+          <div class="voice-controls">
+            <button type="button" id="recordBtn" class="btn-voice">
+              <span class="mic-icon">🎤</span>
+              <span id="recordBtnLabel" data-i18n="btn_record">Record Voice Message</span>
+            </button>
+            <span id="recordStatus" class="muted"></span>
+          </div>
+          <p class="muted voice-hint" data-i18n="voice_hint">Can't type? Just press record and describe your emergency out loud — in any language.</p>
+          <p id="liveTranscript" class="transcript-live"></p>
+          <audio id="voicePreview" controls style="display:none"></audio>
+          <button type="button" id="reRecordBtn" class="btn-link" style="display:none" data-i18n="btn_rerecord">🔁 Re-record</button>
+        </div>
+
+        <label data-i18n="label_location">Location</label>
+        <div class="location-row">
+          <button type="button" id="useLocationBtn" class="btn-secondary" data-i18n="btn_use_location">📍 Use my current location</button>
+          <span id="locationStatus" class="muted"></span>
+        </div>
+        <input type="text" id="addressText" data-i18n-ph="ph_address" placeholder="Or type your address / landmark" />
+
+        <button type="submit" class="btn-primary" data-i18n="btn_submit">🚨 Submit Emergency Report</button>
+      </form>
+
+      <div class="card result-card" id="resultCard" style="display:none">
+        <h3 data-i18n="result_title">Report Submitted</h3>
+        <div id="severityBadgeWrap"></div>
+        <p id="resultId" class="muted"></p>
+        <p id="locationNote" class="location-note"></p>
+        <div id="nearestHelp"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MAP TAB ============ -->
+  <section id="tab-map" class="tab-panel">
+    <div class="card map-card">
+      <div class="map-toolbar">
+        <h2 data-i18n="map_title">Live Situational Map</h2>
+        <div class="legend">
+          <span><i class="dot critical"></i> <span data-i18n="legend_critical">Critical</span></span>
+          <span><i class="dot high"></i> <span data-i18n="legend_high">High</span></span>
+          <span><i class="dot medium"></i> <span data-i18n="legend_medium">Medium</span></span>
+          <span><i class="dot low"></i> <span data-i18n="legend_low">Low</span></span>
+          <span><i class="dot shelter"></i> <span data-i18n="legend_shelter">Shelter</span></span>
+          <span><i class="dot hospital"></i> <span data-i18n="legend_hospital">Hospital</span></span>
+        </div>
+      </div>
+      <div id="map"></div>
+    </div>
+  </section>
+
+  <!-- ============ CHATBOT TAB ============ -->
+  <section id="tab-chatbot" class="tab-panel">
+    <div class="card chat-card">
+      <h2 data-i18n="chat_title">AI Emergency Assistant</h2>
+      <p class="muted" data-i18n="chat_subtitle">Ask for safety guidance in your language. This is not a replacement for calling local emergency services.</p>
+      <div id="chatWindow" class="chat-window"></div>
+      <form id="chatForm" class="chat-input-row">
+        <input type="text" id="chatInput" data-i18n-ph="ph_chat" placeholder="Type your emergency situation..." autocomplete="off" />
+        <button type="submit" class="btn-primary" data-i18n="btn_send">Send</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ DASHBOARD TAB ============ -->
+  <section id="tab-dashboard" class="tab-panel">
+    <div class="stats-row" id="statsRow"></div>
+    <div class="card">
+      <div class="dash-toolbar">
+        <h2 data-i18n="dash_title">SOS Requests — Prioritized</h2>
+        <div class="filter-row">
+          <select id="statusFilter">
+            <option value="all" data-i18n="filter_all">All statuses</option>
+            <option value="pending" data-i18n="filter_pending">Pending</option>
+            <option value="dispatched" data-i18n="filter_dispatched">Dispatched</option>
+            <option value="resolved" data-i18n="filter_resolved">Resolved</option>
+          </select>
+          <button type="button" id="clearDataBtn" class="btn-danger" data-i18n="btn_clear_data">🗑️ Clear All Reports</button>
+        </div>
+      </div>
+      <div id="reportsTableWrap"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p data-i18n="footer_text">RescueLink — AI-Powered Emergency Response & Disaster Assistance Platform. Built for hackathon demo purposes.</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

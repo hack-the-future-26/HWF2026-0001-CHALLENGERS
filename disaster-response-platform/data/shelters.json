@@ -1,0 +1,57 @@
+[
+  {
+    "id": "SH001",
+    "name": "Government High School Relief Camp",
+    "type": "General Shelter",
+    "lat": 18.1180,
+    "lng": 83.4020,
+    "capacity": 300,
+    "occupancy": 120,
+    "contact": "+91-9800000001",
+    "facilities": ["Food", "Drinking Water", "Medical Aid", "Sanitation"]
+  },
+  {
+    "id": "SH002",
+    "name": "Vizianagaram Community Hall",
+    "type": "General Shelter",
+    "lat": 18.0995,
+    "lng": 83.4180,
+    "capacity": 200,
+    "occupancy": 45,
+    "contact": "+91-9800000002",
+    "facilities": ["Food", "Drinking Water", "Power Backup"]
+  },
+  {
+    "id": "SH003",
+    "name": "Municipal Stadium Emergency Shelter",
+    "type": "Flood Shelter",
+    "lat": 18.1050,
+    "lng": 83.4250,
+    "capacity": 500,
+    "occupancy": 310,
+    "contact": "+91-9800000003",
+    "facilities": ["Food", "Medical Aid", "Sanitation", "Children's Area"]
+  },
+  {
+    "id": "SH004",
+    "name": "Zilla Parishad High School Camp",
+    "type": "General Shelter",
+    "lat": 18.0890,
+    "lng": 83.3990,
+    "capacity": 150,
+    "occupancy": 20,
+    "contact": "+91-9800000004",
+    "facilities": ["Food", "Drinking Water"]
+  },
+  {
+    "id": "SH005",
+    "name": "Cyclone Shelter - Coastal Road",
+    "type": "Cyclone Shelter",
+    "lat": 18.1300,
+    "lng": 83.4400,
+    "capacity": 400,
+    "occupancy": 90,
+    "contact": "+91-9800000005",
+    "facilities": ["Reinforced Structure", "Food", "Medical Aid", "Power Backup"]
+  }
+]

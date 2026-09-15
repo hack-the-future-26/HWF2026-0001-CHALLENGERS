@@ -1,0 +1,29 @@
+[
+  {
+    "id": "REQ-MU2ICYLF",
+    "text": "vvv",
+    "isVoiceReport": false,
+    "hadTranscript": true,
+    "audioUrl": null,
+    "estimatedResponseEtaMinutes": 34,
+    "lat": 17.99405801622733,
+    "lng": 83.41528025973422,
+    "locationSource": "gps",
+    "address": null,
+    "name": "Anonymous",
+    "phone": null,
+    "language": "en",
+    "peopleCount": 100000,
+    "emergencyType": "landslide",
+    "severity": {
+      "score": 2,
+      "level": "Medium",
+      "disasterType": "landslide",
+      "vulnerablePeople": [],
+      "matchedTerms": []
+    },
+    "status": "pending",
+    "createdAt": "2026-09-15T10:07:31.236Z",
+    "updatedAt": "2026-09-15T10:07:31.236Z"
+  }
+]

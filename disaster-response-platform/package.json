@@ -1,0 +1,20 @@
+{
+  "name": "disaster-response-platform",
+  "version": "1.0.0",
+  "description": "AI-Powered Emergency Response & Disaster Assistance Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "nodemailer": "^6.9.14",
+    "socket.io": "^4.7.5"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "HP001",
+    "name": "Government General Hospital, Vizianagaram",
+    "lat": 18.1120,
+    "lng": 83.4110,
+    "type": "Government",
+    "emergency": true,
+    "contact": "+91-8922-222100",
+    "specialties": ["Emergency", "Trauma", "General Medicine"]
+  },
+  {
+    "id": "HP002",
+    "name": "MIMS (Maharajah Institute of Medical Sciences)",
+    "lat": 18.0870,
+    "lng": 83.3850,
+    "type": "Private",
+    "emergency": true,
+    "contact": "+91-8922-222200",
+    "specialties": ["Emergency", "Surgery", "ICU", "Maternity"]
+  },
+  {
+    "id": "HP003",
+    "name": "Community Health Center - Cantonment",
+    "lat": 18.1210,
+    "lng": 83.4220,
+    "type": "Government",
+    "emergency": false,
+    "contact": "+91-8922-222300",
+    "specialties": ["General Medicine", "Pediatrics"]
+  },
+  {
+    "id": "HP004",
+    "name": "Apollo Reach Hospital",
+    "lat": 18.0990,
+    "lng": 83.4310,
+    "type": "Private",
+    "emergency": true,
+    "contact": "+91-8922-222400",
+    "specialties": ["Emergency", "Cardiology", "Orthopedics"]
+  }
+]
